@@ -4,12 +4,15 @@ import html2text
 from PIL import Image  # Automatically opens Image
 import sys
 import gmplot
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 class Maps:
 
     def __init__(self):
-        self.key = 'AIzaSyCSB8r7RHHASBZGbdANhFSanYfCaG3tB5U'
+        self.key = os.getenv('MY_API_KEY')
         self.client = googlemaps.Client(key=self.key)
 
     def getDirections(self, addr1, addr2, transportation_mode):
@@ -109,4 +112,5 @@ if __name__ == "__main__":
     mode = 'driving'
     time = gmaps.getTime(addr1, addr2, mode) 
     time = gmaps.reverse(time)
+    print(time)
     
